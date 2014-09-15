@@ -1,6 +1,8 @@
 #include "skeleton.h"
 #include <limits>
 
+using namespace std;
+
 void Skeleton::addJoint(int joint, double x, double y, double z){
 	pair<double,double> tmpyz(y,z);
 	pair<double,pair<double,double> > tmp(x,tmpyz);
@@ -37,4 +39,8 @@ double Skeleton::getJointCord(int joint, char cord){
 			cordinate = numeric_limits<double>::max();
 	}
 	return cordinate;
+}
+
+string Skeleton::toString(int &index){
+	return "";
 }

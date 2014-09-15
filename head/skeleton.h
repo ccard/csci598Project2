@@ -7,8 +7,7 @@
  */
  #include <stdlib.h>
  #include <map>
-
- using namespace std;
+ #include <string>
 
  class Skeleton
  {
@@ -22,6 +21,10 @@
 
  	bool operator< (const Skeleton &other){
  		return frame < other.frame;
+ 	};
+
+ 	bool operator() (const Skeleton &rhs,const Skeleton &lhs){
+ 		return rhs.frame < lhs.frame;
  	};
 
  	/**
@@ -41,7 +44,7 @@
  	 *
  	 * @return: a tuple containing the <x,y,z> cords in that order
  	 */
- 	pair<double,pair<double,double> > getJoint(int joint);
+ 	std::pair<double,std::pair<double,double> > getJoint(int joint);
 
  	/**
  	 * Gets a joints specific x y or z cord
@@ -53,7 +56,9 @@
  	 */
  	double getJointCord(int joint, char cord);
 
+ 	std::string toString(int &index);
+
  private:
  	int frame;
- 	map<int,pair<double,pair<double,double> > > joints;
+ 	std::map<int,std::pair<double,std::pair<double,double> > > joints;
  };

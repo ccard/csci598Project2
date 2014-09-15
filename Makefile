@@ -12,3 +12,5 @@ $(EXEC): $(OBJECTS)
 
 $(BIN)/main.o: main.cpp $(BIN)/other
 
+clean:
+	rm -rf $(BIN)/*.o

@@ -9,7 +9,7 @@ OBJECTS = $(BIN)/main.o $(BIN)/skeleton.o $(BIN)/filehandler.o
 all: $(EXEC)
 
 $(EXEC): $(OBJECTS)
-	$(GCC) $(CXXFLAGS) $(OBJECTS) -o $(EXEC)
+	$(GCC) $(CXXFLAGS) $^ -o $@
 
 $(BIN)/main.o: $(SRC)/main.cpp $(BIN)/skeleton.o $(BIN)/filehandler.o
 	$(GCC) -c $(CXXFLAGS) $^ -o $@

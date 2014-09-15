@@ -6,6 +6,7 @@
  */
 #include <stdlib.h>
 #include <iostream>
+#include "skeleton.h"
 
 using namespace std;
 

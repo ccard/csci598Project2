@@ -3,8 +3,8 @@ CSCI598 Project2
 
 &nbsp;&nbsp;___Author:___   Chris  Card
  
- &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, the [environment](Page#Environment) you will need, 
- and finally [How to run]() each part of the program.
+ &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, the [environment](#environment) you will need, 
+ and finally [how to run](#how-to-run) each part of the program.
 
 --- 
  # Environment #
@@ -26,7 +26,7 @@ developed and tested with that compiler.
  
 ---
 # How to run #
-&nbsp;&nbsp;To run the project ensure that everthing in the [Environment]() and [Compile]() is correct and is able to run.
+&nbsp;&nbsp;To run the project ensure that everthing in the [environment](#environment) and [compile](#compile) is correct and is able to run.
 Ensure that the _train.sh_  and _test.sh_ are in the root directory of the project as well as *human_actions.txt* and 
 *test_human_actions.txt* (these files contain all the human actions that each step of the program will run on). If 
 `./setup.sh` was executed it will tell you if you are missing anything in your environment. The following will explain 
@@ -38,9 +38,9 @@ respectively and will be called as follows:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./train.sh <part_name>` and `./test.sh <part_name>`
 - <part_name> = the string representing each part of the program to run
- - [RAD](Relative Angle and Distances)
- - [HJPD](Histogram of Joint Position Differences)
- - [HOD](Histogram of Oriented Displacements)
+ - [RAD](#relative-angle-and-distances)
+ - [HJPD](#histogram-of-joint-position-differences)
+ - [HOD](#histogram-of-oriented-displacements)
 
 ## Relative Angle and Distances ##
 

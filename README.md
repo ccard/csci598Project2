@@ -3,7 +3,7 @@ CSCI598 Project2
 
 &nbsp;&nbsp;___Author:___   Chris  Card
  
- &nbsp;&nbsp;This README file will explain how to [Compile]() the program, the [Environment]() you will need, 
+ &nbsp;&nbsp;This README file will explain how to [compile](Page#Compile) the program, the [environment](Page#Environment) you will need, 
  and finally [How to run]() each part of the program.
 
 --- 

@@ -3,11 +3,12 @@ CSCI598 Project2
 
 &nbsp;&nbsp;___Author:___   Chris  Card
  
- &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, the [environment](#environment) you will need, 
- and finally [how to run](#how-to-run) each part of the program.
+ &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, 
+ the [environment](#environment) you will need, and finally [how to run](#how-to-run) each part of the program.
+
 
 --- 
- # Environment #
+# Environment #
  &nbsp;&nbsp;The expected environment is as follows:
 
  1. _GNU_ g++ compiler (the same one as on the _Mines_ linux computers) or the equivalent.  If using a different compiler than g++ then the program is not garunteed to compile.  If your using a different compiler open the _Makefile_ and modify the line `GCC = g++` -> `GCC = <new compiler>`.

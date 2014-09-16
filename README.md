@@ -38,7 +38,7 @@ how to run the program for each part of the project.
 respectively and will be called as follows:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./train.sh <part_name>` and `./test.sh <part_name>`
-- <part_name> = the string representing each part of the program to run
+- `<part_name>` = the string representing each part of the program to run
  - [RAD](#relative-angle-and-distances)
  - [HJPD](#histogram-of-joint-position-differences)
  - [HOD](#histogram-of-oriented-displacements)

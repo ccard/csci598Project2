@@ -15,7 +15,7 @@
  	const static char X = 'x';
  	const static char Y = 'y';
  	const static char Z = 'z';
- 	Skeleton(int frame){
+ 	Skeleton(int frame = -1){
  		this->frame = frame;
  	};
 

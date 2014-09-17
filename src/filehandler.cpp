@@ -14,11 +14,18 @@ FileHandler::FileHandler(string file, bool read_write){
 bool FileHandler::getSkeleton(int &frame,int &joint,double &x,double &y, double &z) {
 	if (!read_write) return false;
 	if (!infile.is_open()) return false;
-	if (infile.eof()) return false;
+	if (infile.eof()){
+		frame = -1;
+		return false;
+	}
 
 	string line;
 	getline(infile,line);
-	if(line.size() == 0) return false;
+	if(line.size() == 0) {
+		frame = -1;
+		return false;
+	}
+	
 	stringstream stream(line);
 	istream_iterator<string> begin(stream);
 	istream_iterator<string> end;

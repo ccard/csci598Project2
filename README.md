@@ -33,6 +33,9 @@ Ensure that the _train.sh_  and _test.sh_ are in the root directory of the proje
 `./setup.sh` was executed it will tell you if you are missing anything in your environment. The following will explain 
 how to run the program for each part of the project.
 
+&nbsp;&nbsp;_Note:_ The *human_actions.txt* must be in the following format:
+`Class(int),file(string)`
+
 ## Execution scripts ##
 &nbsp;&nbsp;To execute the training and testing for each part of the project _train.sh_ and _test.sh_ will be used 
 respectively and will be called as follows:

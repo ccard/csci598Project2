@@ -26,13 +26,9 @@ public:
 
 	bool operator<< (std::string s);
 
-	void close(){
-		if (read_write) {
-			infile.close();
-		} else {
-			outfile.close();
-		}
-	};
+	bool is_open(){ return (read_write ? infile.is_open() : outfile.is_open()); };
+
+	void close(){ return (read_write ? infile.close() : outfile.close()); };
 private:
 	std::ifstream infile;
 	std::ofstream outfile;

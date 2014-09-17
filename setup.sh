@@ -11,6 +11,7 @@ failed="${red}failed${NC}"
 echo -n "Checking for ${1} ..... "
 if ! type $1 &> /dev/null; then
 	echo -e $failed
+	echo "---Make sure that the expected command is on the evironments path."
 else
 	echo -e $passed
 fi

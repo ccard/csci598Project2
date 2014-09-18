@@ -17,8 +17,8 @@ CSCI598 Project2
 
 ----
 # Compile #
-&nbsp;&nbsp;To compile the program first run `./setup.sh` this will ensure that all necessary directories and commands that
-are needed to compile and run exsist. Then run `make clean` to ensure that nothing from the submission could prevent the
+&nbsp;&nbsp;To compile the program first run `./setup.sh` this will ensure that all necessary directories, files and commands that
+are needed to compile and run exist. Then run `make clean` to ensure that nothing from the submission could prevent the
 program from running on the current computer.  Once this is complete then run `make` from the same directory as the 
 _Makefile_.
 

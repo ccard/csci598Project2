@@ -23,38 +23,37 @@ local green='\e[0;32m' #green color for echo
 local NC='\e[0m' #no color for echo
 
 local passed="${green}passed${NC}"
-local created="${green}passed${NC}"
+local created="${green}created${NC}"
 local failed="${red}failed${NC}"
 
 local isdir=$2
 local name=$1
 local create=$3
 
-echo -n "Checking for ${name} .... "
-if [[$isdir -eq "yes"]]; then
-	if [[! -d $name]]; then
-		echo $failed
-		if [[$create -eq "yes"]]; then
-			echo -n "Creating dir ${name} .... "
+echo -n "Checking for ${name} ..... "
+if [[ $isdir == "yes" ]]; then
+	if [[ ! -d $name ]]; then
+		if [[ $create == "yes" ]]; then
+			echo -n "Creating dir ${name} ..... "
 			mkdir $name > /dev/null
-			if [[! -d $name]]; then
-				echo $failed
+			if [[ ! -d $name ]]; then
+				echo -e $failed
 				echo "---Failed to create dir ${name} pleas create the directory"
 			else
-				echo $created
+				echo -e $created
 			fi
 		else
 			echo "---Cannot find directory ${name} you may have recieved a bad zip file please contact me"
 		fi
 	else
-		echo $passed
+		echo -e $passed
 	fi
 else
-	if [[! -e $name]]; then
-		echo $failed
-		echo "---Cannot find file ${name} you may have recieved a zip file"
+	if [[ ! -e $name ]]; then
+		echo -e $failed
+		echo "---Cannot find file ${name} you may have recieved a bad zip file please contact me"
 	else
-		echo $passed
+		echo -e $passed
 	fi
 fi
 }
@@ -71,4 +70,23 @@ check_command "svm-scale"
 echo "===================================="
 echo "Checking file directories .... "
 
-check_paths "human_actions"
+check_paths "human_actions.txt" "no" "no"
+check_paths "test_human_actions.txt" "no" "no"
+check_paths "Makefile" "no" "no"
+check_paths "run.sh" "no" "no"
+check_paths "data" "yes" "no"
+check_paths "data/dataset" "yes" "no"
+check_paths "data/dataset/Train" "yes" "no"
+check_paths "data/dataset/Test" "Yes" "no"
+check_paths "bin" "yes" "yes"
+
+red='\e[0;31m' #red color for echo
+green='\e[0;32m' #green color for echo
+NC='\e[0m' #no color for echo
+
+passed="${green}passed${NC}"
+created="${green}created${NC}"
+failed="${red}failed${NC}"
+
+echo -e "If all checks ${passed} or where ${created} then you can processed to compilation and execution!"
+echo -e "If any checks ${failed} please fix them and run this script again or contact me!"

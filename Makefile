@@ -1,3 +1,4 @@
+#Variables
 GCC = g++
 HEAD = ./head
 CXXFLAGS += -I$(HEAD)
@@ -6,6 +7,7 @@ BIN = ./bin
 SRC = ./src
 OBJECTS = $(BIN)/main.o $(BIN)/skeleton.o $(BIN)/filehandler.o
 
+#Compilation
 all: $(EXEC)
 
 $(EXEC): $(OBJECTS)

@@ -12,6 +12,13 @@
 
 using namespace std;
 
+const static string TRAIN = "-tr";
+const static string TEST = "-te";
+
+const static string RAD = "RAD";
+const static string HJPD = "HJPD";
+const static string HOD = "HOD";
+
 vector<string> comma_split(string s){
 	vector<string> split;
 	int current,next = -1;
@@ -84,25 +91,44 @@ bool process_file(string file, string path, map<int,vector<map<int,Skeleton> > >
 	return !aborted;
 }
 
-bool process_args(int argc, char const *argv[], string &file, string &path){
-	if (argc != 3) {
-		cerr << "Usage:" << endl;
-		cerr << "parseSkeleton <path_to_data> <data_file_class_name>" << endl;
-		cerr << "<path_to_data> : path to where the data resides" << endl;
-		cerr << "<data_file_class_name> : must be in the expected format"<< endl;
+void showUsage(){
+	cerr << "Usage:" << endl;
+	cerr << "parseSkeleton <flag> <method> <path_to_data> <data_file_class_name>" << endl;
+	cerr << "<flag> : to create training data " << TRAIN << ", to creat testing data " << TEST << endl;
+	cerr << "<method> : " << RAD << ", " << HJPD << ", " << HOD << endl;
+	cerr << "<path_to_data> : path to where the data resides" << endl;
+	cerr << "<data_file_class_name> : must be in the expected format"<< endl;
+}
+
+bool process_args(int argc, char const *argv[],string &flag, string &method,string &file, string &path){
+	if (argc != 5) {
+		showUsage();
 		return false;
 	} else {
-		path = string(argv[1]);
-		file = string(argv[2]);
+		flag = string(argv[1]);
+		method = string(argv[2]);
+		path = string(argv[3]);
+		file = string(argv[4]);
+		if(flag != TEST && flag != TRAIN){
+			showUsage();
+			return false;
+		}
+		if (method != RAD && method != HJPD && method != HOD)
+		{
+			showUsage();
+			return false;
+		}
 		return true;
 	}
 }
 
+
+
 int main(int argc, char const *argv[])
 {
-	string file,path;
+	string flag,method,file,path;
 	map<int,vector<map<int, Skeleton> > > skels;
-	if (!process_args(argc,argv,file,path)) return 2;
+	if (!process_args(argc,argv,flag,method,file,path)) return 2;
 	if (!process_file(file,path,skels)) return 2;
 	cout << skels.size() << endl;
 	return 0;

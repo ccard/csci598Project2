@@ -91,6 +91,17 @@ bool process_file(string file, string path, map<int,vector<map<int,Skeleton> > >
 	return !aborted;
 }
 
+void buildRADData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+
+}
+
+void buildHJDPData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+	
+}
+void buildHODData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+	
+}
+
 void showUsage(){
 	cerr << "Usage:" << endl;
 	cerr << "parseSkeleton <flag> <method> <path_to_data> <data_file_class_name>" << endl;
@@ -131,5 +142,18 @@ int main(int argc, char const *argv[])
 	if (!process_args(argc,argv,flag,method,file,path)) return 2;
 	if (!process_file(file,path,skels)) return 2;
 	cout << skels.size() << endl;
+	
+	if(method == RAD){
+		buildRADData(flag,skels);
+	} else if (method == HJPD) {
+		buildHJDPData(flag,skels);
+	} else if (method == HOD) {
+		buildHODData(flag,skels);
+	} else {
+		cerr << "The wrong method flag " << method << ". Some how made it past the checks." << endl;
+		showUsage();
+		return 2;
+	}
+
 	return 0;
 }

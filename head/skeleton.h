@@ -20,7 +20,7 @@
  		this->frame = frame;
  	};
 
- 	bool operator< (const Skeleton &other){
+ 	bool operator< (const Skeleton &other) const{
  		return frame < other.frame;
  	};
 

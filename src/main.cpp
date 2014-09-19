@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+#include <set>
 #include "skeleton.h"
 #include "filehandler.h"
 #include "rad_skeleton.h"
@@ -31,7 +32,7 @@ vector<string> comma_split(string s){
 	return split;
 }
 
-bool process_file(string file, string path, map<int,vector<map<int,Skeleton> > > &skels){
+bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &skels){
 	ifstream infile(file.c_str());
 	string line = "-1-1";
 	string err_msg = "";
@@ -76,11 +77,16 @@ bool process_file(string file, string path, map<int,vector<map<int,Skeleton> > >
 			break;
 		}
 		
+		set<Skeleton> class_set;
+		for(map<int,Skeleton>::iterator i = file_skel.begin(); i != file_skel.end(); ++i){
+			class_set.insert(i->second);
+		}
+
 		if (skels.find(class_num) != skels.end()){
-			skels[class_num].push_back(file_skel);
+			skels[class_num].push_back(class_set);
 		} else {
-			vector<map<int,Skeleton> > temp_vec;
-			temp_vec.push_back(file_skel);
+			vector<set<Skeleton> > temp_vec;
+			temp_vec.push_back(class_set);
 			skels.insert(make_pair(class_num,temp_vec));
 		}
 	}
@@ -92,14 +98,14 @@ bool process_file(string file, string path, map<int,vector<map<int,Skeleton> > >
 	return !aborted;
 }
 
-void buildRADData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+void buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
 
 }
 
-void buildHJDPData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+void buildHJDPData(string flag,map<int,vector<set<Skeleton> > > skels){
 	
 }
-void buildHODData(string flag,map<int,vector<map<int, Skeleton> > > skels){
+void buildHODData(string flag,map<int,vector<set<Skeleton> > > skels){
 	
 }
 
@@ -134,12 +140,10 @@ bool process_args(int argc, char const *argv[],string &flag, string &method,stri
 	}
 }
 
-
-
 int main(int argc, char const *argv[])
 {
 	string flag,method,file,path;
-	map<int,vector<map<int, Skeleton> > > skels;
+	map<int,vector<set<Skeleton> > > skels;
 	if (!process_args(argc,argv,flag,method,file,path)) return 2;
 	if (!process_file(file,path,skels)) return 2;
 	cout << skels.size() << endl;

@@ -28,6 +28,8 @@
  		return rhs.frame < lhs.frame;
  	};
 
+ 	int getFrame(){ return frame; };
+
  	/**
  	 * Adds a joint to the skeleton
  	 *

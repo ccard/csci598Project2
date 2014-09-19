@@ -8,6 +8,7 @@
  #include <stdlib.h>
  #include <map>
  #include <string>
+ #include <vector>
 
  class Skeleton
  {
@@ -44,7 +45,7 @@
  	 *
  	 * @return: a tuple containing the <x,y,z> cords in that order
  	 */
- 	std::pair<double,std::pair<double,double> > getJoint(int joint);
+ 	std::vector<double> getJoint(int joint);
 
  	/**
  	 * Gets a joints specific x y or z cord
@@ -58,7 +59,7 @@
 
  	std::string toString(int &index);
 
- private:
+ protected:
  	int frame;
- 	std::map<int,std::pair<double,std::pair<double,double> > > joints;
+ 	std::map<int,std::vector<double> > joints;
  };

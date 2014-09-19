@@ -4,18 +4,24 @@
 using namespace std;
 
 void Skeleton::addJoint(int joint, double x, double y, double z){
-	pair<double,double> tmpyz(y,z);
-	pair<double,pair<double,double> > tmp(x,tmpyz);
+	if (joints.find(joint) != joints.end()) return;
+	vector<double> tmp;
+	tmp.push_back(x);
+	tmp.push_back(y);
+	tmp.push_back(z);
 	joints.insert(make_pair(joint,tmp));
 }
 
-pair<double,pair<double,double> > Skeleton::getJoint(int joint){
+vector<double> Skeleton::getJoint(int joint){
 	if (joints.find(joint) != joints.end())
 	{
 		return joints[joint];
 	}
-	pair<double,double> tmp(0,0);
-	return pair<double,pair<double,double> >(0,tmp);
+	vector<double> tmp;
+	tmp.push_back(0);
+	tmp.push_back(0);
+	tmp.push_back(0);
+	return tmp;
 }
 
 double Skeleton::getJointCord(int joint, char cord){
@@ -27,13 +33,13 @@ double Skeleton::getJointCord(int joint, char cord){
 	double cordinate;
 	switch(cord){
 		case Skeleton::X:
-			cordinate = joints[joint].first;
+			cordinate = joints[joint][0];
 			break;
 		case Skeleton::Y:
-			cordinate = joints[joint].second.first;
+			cordinate = joints[joint][1];
 			break;
 		case Skeleton::Z:
-			cordinate = joints[joint].second.second;
+			cordinate = joints[joint][2];
 			break;
 		default:
 			cordinate = numeric_limits<double>::max();

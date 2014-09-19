@@ -9,6 +9,7 @@
 #include <fstream>
 #include "skeleton.h"
 #include "filehandler.h"
+#include "rad_skeleton.h"
 
 using namespace std;
 

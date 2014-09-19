@@ -77,8 +77,10 @@ check_paths "run.sh" "no" "no"
 check_paths "data" "yes" "no"
 check_paths "data/dataset" "yes" "no"
 check_paths "data/dataset/Train" "yes" "no"
-check_paths "data/dataset/Test" "Yes" "no"
+check_paths "data/dataset/Test" "yes" "no"
 check_paths "bin" "yes" "yes"
+check_paths "head" "yes" "no"
+check_paths "src" "yes" "no"
 
 red='\e[0;31m' #red color for echo
 green='\e[0;32m' #green color for echo

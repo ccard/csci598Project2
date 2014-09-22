@@ -5,12 +5,19 @@ CXXFLAGS += -I$(HEAD)
 DEBUGFLAGS = -Wall -Wextra -ggdb3
 DEBUG = 
 EXEC = parseSkeleton
+EXDEBUG = $(EXEC).d
 BIN = ./bin
 SRC = ./src
 OBJECTS = $(BIN)/main.o $(BIN)/skeleton.o $(BIN)/filehandler.o $(BIN)/rad_skeleton.o $(BIN)/radcompute.o $(BIN)/histogram.o
 
 #Compilation
 all: $(EXEC)
+
+debug: DEBUG += $(DEBUGFLAGS)
+debug: $(EXDEBUG)
+
+$(EXDEBUG): $(OBJECTS)
+	$(GCC) $(DEBUG) $(CXXFLAGS) $^ -o $@
 
 $(EXEC): $(OBJECTS)
 	$(GCC) $(DEBUG) $(CXXFLAGS) $^ -o $@
@@ -36,3 +43,4 @@ $(BIN)/histogram.o: $(SRC)/histogram.cpp
 clean:
 	rm -rf $(BIN)/*.o
 	rm -rf $(EXEC)
+	rm -rf $(EXDEBUG)

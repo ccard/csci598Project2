@@ -32,7 +32,7 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 			}
 		}
 	}
-
+	cout << d_hist.size() << endl;
 	return Histograms(d_hist,t_hist);
 }
 
@@ -60,6 +60,33 @@ vector<double> RADCompute::toOneD(Histograms hist){
 	return v_ret;
 }
 
-bool RADCompute::write(FileHandler &f, std::map<int, std::vector<std::vector<double> > > &linear_hist){
-	return false;
+bool RADCompute::write(FileHandler &f, map<int, vector<vector<double> > > &linear_hist){
+	
+	if(!f.is_open()) return false;
+	string err_msg = "";
+	bool aborted = false;
+	for(map<int, vector<vector<double> > >::iterator i = linear_hist.begin(); i != linear_hist.end(); ++i){
+		int class_label = i->first;
+		for(vector<vector<double> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
+			int inst_idx = -1;
+			string inst_str = "";
+			for(vector<double>::iterator e = j->begin(); e != j->end(); ++e){
+				ostringstream doubles;
+				doubles << *e;
+				inst_str += (++inst_idx)+":"+doubles.str() + " ";
+			}
+			inst_str = class_label + " " + inst_str + "\n";
+			if(!(f << inst_str)){
+				aborted = true;
+				err_msg += "failed to write: " + inst_str + " : to the file\n";
+				break;
+			}
+		}
+		if(aborted) break;
+	}
+
+	if(aborted){
+		cerr << err_msg << endl;
+	}
+	return !aborted;
 }

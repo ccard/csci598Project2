@@ -100,7 +100,7 @@ bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &sk
 	return !aborted;
 }
 
-void buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
+int buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
 	map<int, vector<set<RAD_Skeleton> > > rad_skels;
 	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
 		vector<set<RAD_Skeleton> > tmp_v;
@@ -127,13 +127,26 @@ void buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
 		}
 		linear_data.insert(make_pair(i->first,tmp_v));
 	}
+
+	string filename = "rad";
+	filename += flag == TEST ? ".t" : ""; 
+	FileHandler out(filename,false);
+
+	if(!radc.write(out,linear_data)){
+		out.close();
+		cerr << "please check error msgs" << endl;
+		return 2;
+	}
+	out.close();
+	return 0;
 }
 
-void buildHJDPData(string flag,map<int,vector<set<Skeleton> > > skels){
-	
+int buildHJDPData(string flag,map<int,vector<set<Skeleton> > > skels){
+	return 0;
 }
-void buildHODData(string flag,map<int,vector<set<Skeleton> > > skels){
-	
+
+int buildHODData(string flag,map<int,vector<set<Skeleton> > > skels){
+	return 0;
 }
 
 void showUsage(){
@@ -174,18 +187,18 @@ int main(int argc, char const *argv[])
 	if (!process_args(argc,argv,flag,method,file,path)) return 2;
 	if (!process_file(file,path,skels)) return 2;
 	cout << skels.size() << endl;
-	
+	int res = 0;
 	if(method == RAD){
-		buildRADData(flag,skels);
+		res = buildRADData(flag,skels);
 	} else if (method == HJPD) {
-		buildHJDPData(flag,skels);
+		res = buildHJDPData(flag,skels);
 	} else if (method == HOD) {
-		buildHODData(flag,skels);
+		res = buildHODData(flag,skels);
 	} else {
 		cerr << "The wrong method flag " << method << ". Some how made it past the checks." << endl;
 		showUsage();
 		return 2;
 	}
 
-	return 0;
+	return res;
 }

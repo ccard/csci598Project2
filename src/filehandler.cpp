@@ -55,5 +55,6 @@ bool FileHandler::operator<< (string s){
 	if(!outfile.is_open()) return false;
 
 	outfile.write(s.c_str(),s.size());
+	outfile.flush();
 	return true;
 }

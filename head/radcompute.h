@@ -22,6 +22,8 @@
 #include "histogram.h"
 #include <map>
 #include <string>
+#include <iostream>
+#include <sstream>
 #include <set>
 #define _USE_MATH_DEFINES
 #include <math.h>

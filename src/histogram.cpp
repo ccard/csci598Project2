@@ -1,4 +1,5 @@
 #include "histogram.h"
+#include <iostream>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ void Histogram::addValue(double val){
 			prev_min = i->second;
 		}
 	}
-
+	cout << val << ":" << bin << endl;
 	histo[bin] += 1;
 }
 

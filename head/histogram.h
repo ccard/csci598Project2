@@ -32,7 +32,7 @@
  	int bins;
  	double min,max;
  	std::map<int, double> histo;
- 	std::map<int,double> bin_map;
+ 	std::map<int,std::pair<double,double> > bin_map;
 
  	void init_histo();
 };

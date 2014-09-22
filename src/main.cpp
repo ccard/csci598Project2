@@ -63,7 +63,7 @@ bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &sk
 				err_msg += "Failed to read skeleton data\n";
 				break;
 			}
-			
+
 			if (file_skel.find(frame) != file_skel.end()){
 				file_skel[frame].addJoint(joint,x,y,z);
 			} else {
@@ -100,10 +100,11 @@ bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &sk
 	return !aborted;
 }
 
-int buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
+int buildRADData(string flag,map<int,vector<set<Skeleton> > > &skels){
 	map<int, vector<set<RAD_Skeleton> > > rad_skels;
 	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
 		vector<set<RAD_Skeleton> > tmp_v;
+		
 		for(vector<set<Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
 			set<RAD_Skeleton> tmp_s;
 			for(set<Skeleton>::iterator e = j->begin(); e != j->end(); ++e){
@@ -111,6 +112,7 @@ int buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
 			}
 			tmp_v.push_back(tmp_s);
 		}
+		
 		rad_skels.insert(make_pair(i->first,tmp_v));
 	}
 
@@ -186,7 +188,7 @@ int main(int argc, char const *argv[])
 	map<int,vector<set<Skeleton> > > skels;
 	if (!process_args(argc,argv,flag,method,file,path)) return 2;
 	if (!process_file(file,path,skels)) return 2;
-	cout << skels.size() << endl;
+	
 	int res = 0;
 	if(method == RAD){
 		res = buildRADData(flag,skels);

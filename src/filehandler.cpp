@@ -7,7 +7,7 @@ FileHandler::FileHandler(string file, bool read_write){
 	if (read_write) {
 		infile.open(file.c_str());
 	} else {
-		outfile.open(file.c_str());
+		outfile.open(file.c_str(),ofstream::out);
 	}
 }
 
@@ -54,7 +54,7 @@ bool FileHandler::operator<< (string s){
 	if (read_write) return false;
 	if(!outfile.is_open()) return false;
 
-	outfile.write(s.c_str(),s.size());
-	outfile.flush();
+	outfile << s;
+	//outfile.flush();
 	return true;
 }

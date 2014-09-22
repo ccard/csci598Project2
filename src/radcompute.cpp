@@ -3,12 +3,12 @@
 using namespace std;
 
 RADCompute::RADCompute(){
-	n_d_bins = 6;
+	n_d_bins = 5;
 	m_t_bins = 6;
-	min_d = 0.5;
-	max_d = 2;
-	min_t = 0;
-	max_t = M_PI;
+	min_d = 0.1;
+	max_d = 1.0;
+	min_t = 0.0;
+	max_t = 3.0;
 }
 
 Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
@@ -16,6 +16,7 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 	for(set<RAD_Skeleton>::iterator i = frame_skels.begin(); i != frame_skels.end(); ++i){
 		map<int, pair<double,double> > tmp = i->getJointsThetaRho();
 		for(map<int, pair<double,double> >::iterator j = tmp.begin(); j != tmp.end(); ++j){
+			//cout << "d_hist" << endl;
 			if(d_hist.find(j->first) == d_hist.end()){
 				Histogram h(n_d_bins,min_d,max_d);
 				h.addValue(j->second.second);
@@ -23,24 +24,26 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 			} else {
 				d_hist[j->first].addValue(j->second.second);
 			}
+			// cout << "t_hist" << endl;
 			if(t_hist.find(j->first) == t_hist.end()){
 				Histogram h(m_t_bins,min_t,max_t);
 				h.addValue(j->second.first);
-				d_hist.insert(make_pair(j->first,h));
+				t_hist.insert(make_pair(j->first,h));
 			} else {
 				t_hist[j->first].addValue(j->second.first);
 			}
 		}
 	}
-	cout << d_hist.size() << endl;
+	//cout << d_hist.size() << endl;
 	return Histograms(d_hist,t_hist);
 }
 
-Histograms RADCompute::normalizeHisto(Histograms hist, int t){
+Histograms RADCompute::normalizeHisto(Histograms hist, double t){
+	cout << "d_hist: " << endl;
 	for(map<int,Histogram>::iterator i = hist.first.begin(); i != hist.first.end(); ++i){
 		i->second.normalize(t);
 	}
-
+	cout << "t_hist" << endl;
 	for(map<int,Histogram>::iterator i = hist.second.begin(); i != hist.second.end(); ++i){
 		i->second.normalize(t);
 	}
@@ -48,7 +51,7 @@ Histograms RADCompute::normalizeHisto(Histograms hist, int t){
 }
 
 vector<double> RADCompute::toOneD(Histograms hist){
-	vector<double> v_ret(5*(n_d_bins+m_t_bins));
+	vector<double> v_ret;
 	for(map<int,Histogram>::iterator i = hist.first.begin(); i != hist.first.end(); ++i){
 		i->second.makeLinear(v_ret);
 	}
@@ -71,16 +74,19 @@ bool RADCompute::write(FileHandler &f, map<int, vector<vector<double> > > &linea
 			int inst_idx = -1;
 			string inst_str = "";
 			for(vector<double>::iterator e = j->begin(); e != j->end(); ++e){
-				ostringstream doubles;
-				doubles << *e;
-				inst_str += (++inst_idx)+":"+doubles.str() + " ";
+				char buff[100];
+				sprintf(buff,"%d:%5.7f ",++inst_idx,*e);
+				inst_str += buff;
+				
 			}
+			cout << inst_str << endl;
 			inst_str = class_label + " " + inst_str + "\n";
-			if(!(f << inst_str)){
-				aborted = true;
-				err_msg += "failed to write: " + inst_str + " : to the file\n";
-				break;
-			}
+			//bool worked = f << inst_str;
+			// if(!worked){
+			// 	aborted = true;
+			// 	err_msg += "Failed to write: " + inst_str + " : to the file\n";
+			// 	break;
+			// }
 		}
 		if(aborted) break;
 	}

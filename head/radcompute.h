@@ -51,7 +51,7 @@ public:
 	 *
 	 * @return: the normalized histograms
 	 */
-	Histograms normalizeHisto(Histograms hist, int t);
+	Histograms normalizeHisto(Histograms hist, double t);
 
 	/**
 	 * Forms a one dimensional vector of the normalize histograms

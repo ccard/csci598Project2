@@ -4,6 +4,7 @@ using namespace std;
 
 RAD_Skeleton::RAD_Skeleton(Skeleton skel){
 	vector<double> xyz;
+	frame = skel.getFrame();
 	xyz = skel.getJoint(CENT);
 	addJoint(CENT,xyz[0],xyz[1],xyz[2]);
 
@@ -81,7 +82,7 @@ double RAD_Skeleton::calcTheta(vector<double> joint1, vector<double> joint2){
 
 double RAD_Skeleton::dot(vector<double> v1, vector<double> v2){
 	vector<double> d;
-	d.push_back(v1[0]*v2[0]);	
+	d.push_back(v1[0]*v2[0]);
 	d.push_back(v1[1]*v2[1]);
 	d.push_back(v1[2]*v2[2]);
 	return (d[0]+d[1]+d[2]);

@@ -13,29 +13,28 @@ Histogram::Histogram(int bins,double min, double max){
 void Histogram::addValue(double val){
 	int bin = 0;
 	double prev_min;
-	for(map<int,double>::iterator i = bin_map.begin(); i != bin_map.end(); ++i){
+	if(val != val) return;
+	for(map<int,pair<double,double> >::iterator i = bin_map.begin(); i != bin_map.end(); ++i){
 		if(i->first == 0){
-			if (i->second > val){
+			if (val < i->second.second){
 				bin = i->first;
 				break;
 			}
-			prev_min = i->second;
-		} else if (i->first == bins-1) {
-			if(i->second <= val){
+		} else if (i->first == (bins-1)) {
+			if(i->second.first <= val){
 				bin = i->first;
 				break;
 			}
-			prev_min = i->second;
 		} else {
-			if(i->second > val && prev_min <= val){
+			if(val >= i->second.first && val < i->second.second){
 				bin = i->first;
 				break;
 			}
-			prev_min = i->second;
 		}
 	}
-	cout << val << ":" << bin << endl;
+	
 	histo[bin] += 1;
+	//cout << "bin: "<< bin << " val: "<< val << " cnt: " << histo[bin] << endl;
 }
 
 void Histogram::normalize(double T){
@@ -43,6 +42,7 @@ void Histogram::normalize(double T){
 	if (T == 0) return;
 	for(map<int,double>::iterator i = histo.begin(); i != histo.end(); ++i){
 		normed.insert(make_pair(i->first,i->second/T));
+		cout << i->first << ":" << normed[i->first] << endl;
 	}
 	histo = normed;
 }
@@ -60,11 +60,14 @@ void Histogram::init_histo(){
 
 	double step = (max-min)/bins;
 
-	double curr_max = min+step;
+	double bin_min = min;
+	double bin_max = min+step;
 
 	for (int j = 0; j < bins; ++j)
 	{
-		bin_map.insert(make_pair(j,curr_max));
-		curr_max += step;
+		pair<double,double> tmp(bin_min,bin_max);
+		bin_map.insert(make_pair(j,tmp));
+		bin_max += (2*step);
+		bin_min += step;
 	}
 }

@@ -11,6 +11,8 @@
 #include "skeleton.h"
 #include "filehandler.h"
 #include "rad_skeleton.h"
+#include "radcompute.h"
+#include "histogram.h"
 
 using namespace std;
 
@@ -99,7 +101,32 @@ bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &sk
 }
 
 void buildRADData(string flag,map<int,vector<set<Skeleton> > > skels){
+	map<int, vector<set<RAD_Skeleton> > > rad_skels;
+	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
+		vector<set<RAD_Skeleton> > tmp_v;
+		for(vector<set<Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
+			set<RAD_Skeleton> tmp_s;
+			for(set<Skeleton>::iterator e = j->begin(); e != j->end(); ++e){
+				tmp_s.insert(RAD_Skeleton(*e));
+			}
+			tmp_v.push_back(tmp_s);
+		}
+		rad_skels.insert(make_pair(i->first,tmp_v));
+	}
 
+	RADCompute radc;
+
+	map<int,vector<vector<double> > > linear_data;
+
+	for(map<int, vector<set<RAD_Skeleton> > >::iterator i = rad_skels.begin(); i != rad_skels.end(); ++i){
+		vector<vector<double> > tmp_v;
+		for(vector<set<RAD_Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
+			Histograms hists = radc.computeHistograms(*j);
+			hists = radc.normalizeHisto(hists,j->size());
+			tmp_v.push_back(radc.toOneD(hists));
+		}
+		linear_data.insert(make_pair(i->first,tmp_v));
+	}
 }
 
 void buildHJDPData(string flag,map<int,vector<set<Skeleton> > > skels){

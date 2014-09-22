@@ -43,7 +43,7 @@ public:
  	 *
  	 * @return: map from the joint to pair<theta,rho> 
  	 */
- 	std::map<int, std::pair<double,double> > getJointsThetaRho(){ return jointThetaRho; };
+ 	std::map<int, std::pair<double,double> > getJointsThetaRho() const{ return jointThetaRho; };
 
 private:
 

@@ -16,7 +16,6 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 	for(set<RAD_Skeleton>::iterator i = frame_skels.begin(); i != frame_skels.end(); ++i){
 		map<int, pair<double,double> > tmp = i->getJointsThetaRho();
 		for(map<int, pair<double,double> >::iterator j = tmp.begin(); j != tmp.end(); ++j){
-			//cout << "d_hist" << endl;
 			if(d_hist.find(j->first) == d_hist.end()){
 				Histogram h(n_d_bins,min_d,max_d);
 				h.addValue(j->second.second);
@@ -24,7 +23,7 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 			} else {
 				d_hist[j->first].addValue(j->second.second);
 			}
-			// cout << "t_hist" << endl;
+			
 			if(t_hist.find(j->first) == t_hist.end()){
 				Histogram h(m_t_bins,min_t,max_t);
 				h.addValue(j->second.first);
@@ -34,7 +33,7 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 			}
 		}
 	}
-	//cout << d_hist.size() << endl;
+	
 	return Histograms(d_hist,t_hist);
 }
 
@@ -79,14 +78,17 @@ bool RADCompute::write(FileHandler &f, map<int, vector<vector<double> > > &linea
 				inst_str += buff;
 				
 			}
-			cout << inst_str << endl;
-			inst_str = class_label + " " + inst_str + "\n";
-			//bool worked = f << inst_str;
-			// if(!worked){
-			// 	aborted = true;
-			// 	err_msg += "Failed to write: " + inst_str + " : to the file\n";
-			// 	break;
-			// }
+			char *buff;
+			buff = (char *)malloc(sizeof(char)*(inst_str.size()+100));
+			sprintf(buff,"%d %s\n",class_label,inst_str.c_str());
+			inst_str = string(buff);
+			delete []buff;
+			bool worked = f << inst_str;
+			if(!worked){
+			 	aborted = true;
+				err_msg += "Failed to write: " + inst_str + " : to the file\n";
+				break;
+			}
 		}
 		if(aborted) break;
 	}

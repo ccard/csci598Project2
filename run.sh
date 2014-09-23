@@ -79,7 +79,7 @@ else
 		argtrain="-c 8 -g 0.125"
 
 		if [[ $1 == $rad ]]; then
-			argtrain="-c 8 -g 0.115"			
+			argtrain="-c 8 -g 0.125"			
 		elif [[ $1 == $hjdp ]]; then
 			argtrain="-c 8 -g 0.125"
 		elif [[ $1 == $hod ]]; then

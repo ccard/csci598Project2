@@ -3,12 +3,12 @@
 using namespace std;
 
 RADCompute::RADCompute(){
-	n_d_bins = 7;
-	m_t_bins = 8;
+	n_d_bins = 6;
+	m_t_bins = 5;
 	min_d = 0.1;
-	max_d = 1.2;
+	max_d = 1.0;
 	min_t = 0.0;
-	max_t = 2.0;
+	max_t = 1.9;
 }
 
 Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){

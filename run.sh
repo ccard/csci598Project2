@@ -74,9 +74,17 @@ else
 		trsvm="svm-train"
 
 		#flags for svm
-		argscale="-l -1 -u 1 -s ${trfile}.range1"
+		argscale="-l 0 -u 1 -s ${trfile}.range1"
 		argscalet="-r ${trfile}.range1"
-		argtrain="-c 2 -g 2"
+		argtrain="-c 8 -g 0.125"
+
+		if [[ $1 == $rad ]]; then
+			argtrain="-c 8 -g 0.115"			
+		elif [[ $1 == $hjdp ]]; then
+			argtrain="-c 8 -g 0.125"
+		elif [[ $1 == $hod ]]; then
+			argtrain="-c 8 -g 0.125"
+		fi
 
 		#execution commands for svm
 		exscale="${scale} ${argscale} ${trfile} > ${trscale}"

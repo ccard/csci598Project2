@@ -79,6 +79,7 @@ check_paths "data/dataset" "yes" "no"
 check_paths "data/dataset/Train" "yes" "no"
 check_paths "data/dataset/Test" "yes" "no"
 check_paths "bin" "yes" "yes"
+check_paths "results" "yes" "yes"
 check_paths "head" "yes" "no"
 check_paths "src" "yes" "no"
 

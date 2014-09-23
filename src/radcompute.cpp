@@ -3,12 +3,12 @@
 using namespace std;
 
 RADCompute::RADCompute(){
-	n_d_bins = 5;
-	m_t_bins = 6;
+	n_d_bins = 7;
+	m_t_bins = 8;
 	min_d = 0.1;
-	max_d = 1.0;
+	max_d = 1.2;
 	min_t = 0.0;
-	max_t = 3.0;
+	max_t = 2.0;
 }
 
 Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
@@ -70,7 +70,7 @@ bool RADCompute::write(FileHandler &f, map<int, vector<vector<double> > > &linea
 	for(map<int, vector<vector<double> > >::iterator i = linear_hist.begin(); i != linear_hist.end(); ++i){
 		int class_label = i->first;
 		for(vector<vector<double> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
-			int inst_idx = -1;
+			int inst_idx = 0;
 			string inst_str = "";
 			for(vector<double>::iterator e = j->begin(); e != j->end(); ++e){
 				char buff[100];

@@ -38,11 +38,11 @@ Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 }
 
 Histograms RADCompute::normalizeHisto(Histograms hist, double t){
-	cout << "d_hist: " << endl;
+	//cout << "d_hist: " << endl;
 	for(map<int,Histogram>::iterator i = hist.first.begin(); i != hist.first.end(); ++i){
 		i->second.normalize(t);
 	}
-	cout << "t_hist" << endl;
+	//cout << "t_hist" << endl;
 	for(map<int,Histogram>::iterator i = hist.second.begin(); i != hist.second.end(); ++i){
 		i->second.normalize(t);
 	}

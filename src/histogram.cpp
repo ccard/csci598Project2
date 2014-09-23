@@ -42,7 +42,7 @@ void Histogram::normalize(double T){
 	if (T == 0) return;
 	for(map<int,double>::iterator i = histo.begin(); i != histo.end(); ++i){
 		normed.insert(make_pair(i->first,i->second/T));
-		cout << i->first << ":" << normed[i->first] << endl;
+		//cout << i->first << ":" << normed[i->first] << endl;
 	}
 	histo = normed;
 }

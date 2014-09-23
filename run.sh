@@ -102,7 +102,7 @@ else
 		run "Running prediction" "${expred}"
 
 		clearFiles result
-		echo $result
+		
 		if [[ $result == "y" ]]; then
 			rem="rm ${trfile}*"
 			run "Removing files" "${rem}"

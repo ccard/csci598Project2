@@ -10,9 +10,10 @@ BIN = ./bin
 SRC = ./src
 OBJECTS = $(BIN)/main.o $(BIN)/skeleton.o $(BIN)/filehandler.o $(BIN)/rad_skeleton.o $(BIN)/radcompute.o $(BIN)/histogram.o
 
-#Compilation
+#Compile all target
 all: $(EXEC)
 
+#Compile debug target
 debug: DEBUG += $(DEBUGFLAGS)
 debug: $(EXDEBUG)
 
@@ -22,7 +23,7 @@ $(EXDEBUG): $(OBJECTS)
 $(EXEC): $(OBJECTS)
 	$(GCC) $(DEBUG) $(CXXFLAGS) $^ -o $@
 
-$(BIN)/main.o: $(SRC)/main.cpp $(BIN)/skeleton.o $(BIN)/filehandler.o
+$(BIN)/main.o: $(SRC)/main.cpp $(BIN)/skeleton.o $(BIN)/filehandler.o $(BIN)/rad_skeleton.o $(BIN)/radcompute.o
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
 $(BIN)/radcompute.o: $(SRC)/radcompute.cpp $(BIN)/rad_skeleton.o $(BIN)/histogram.o $(BIN)/filehandler.o

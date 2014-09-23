@@ -63,8 +63,8 @@ else
 		trsvm="svm-train"
 
 		#flags for svm
-		argscale="-l -1 -u 1 -s range1"
-		argscalet="-r range1"
+		argscale="-l -1 -u 1 -s ${trfile}.range1"
+		argscalet="-r ${trfile}.range1"
 		argtrain="-c 2 -g 2"
 
 		#execution commands for svm

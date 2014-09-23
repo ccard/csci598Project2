@@ -70,7 +70,7 @@ else
 		#execution commands for svm
 		exscale="${scale} ${argscale} ${trfile} > ${trscale}"
 		exscalet="${scale} ${argscalet} ${tefile} > ${tescale}"
-		extrain="${trsvm} ${argtrain} ${trscale}"
+		extrain="${trsvm} ${argtrain} ${trscale} > ${trfile}.log"
 		expred="${pred} ${tescale} ${modelfile} ${predfile}"
 
 		#execution commands for my program to create the skeletons data

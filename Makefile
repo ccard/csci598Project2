@@ -8,7 +8,10 @@ EXEC = parseSkeleton
 EXDEBUG = $(EXEC).d
 BIN = ./bin
 SRC = ./src
-OBJECTS = $(BIN)/main.o $(BIN)/skeleton.o $(BIN)/filehandler.o $(BIN)/rad_skeleton.o $(BIN)/radcompute.o $(BIN)/histogram.o
+SKELETONS = $(BIN)/skeleton.o $(BIN)/rad_skeleton.o
+COMPUTE = $(BIN)/radcompute.o
+UTIL = $(BIN)/filehandler.o $(BIN)/histogram.o
+OBJECTS = $(BIN)/main.o $(SKELETONS) $(UTIL) $(COMPUTE) 
 
 #Compile all target
 all: $(EXEC)

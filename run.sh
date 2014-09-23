@@ -21,6 +21,17 @@ function usage {
 	echo "           ${hod}"
 }
 
+function clearFiles {
+	local __resvar=$1
+	read -p "Delete output files [y or n]:" -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		eval $__resvar="'y'"
+	else
+		eval $__resvar="'n'"
+	fi
+}
+
 function run {
 	local message=$1
 	local stmt=$2
@@ -89,5 +100,12 @@ else
 		run "Training svm" "${extrain}"
 
 		run "Running prediction" "${expred}"
+
+		clearFiles result
+		echo $result
+		if [[ $result == "y" ]]; then
+			rem="rm ${trfile}*"
+			run "Removing files" "${rem}"
+		fi
 	fi
 fi

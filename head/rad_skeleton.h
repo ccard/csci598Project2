@@ -37,6 +37,14 @@ public:
  	void addJoint(int joint,double x, double y, double z);
 
  	/**
+ 	 * Adds a joint to the skeleton
+ 	 *
+ 	 * @param: the joint
+ 	 * @param: vec of x y z cords in that order
+ 	 */
+ 	void addJoint(int joint, std::vector<double> xyz);
+
+ 	/**
  	 * This method gets the theta and distance(rho) of each joint
  	 * where rho is the distance from body centroid and theta is the angle between two 
  	 * body extremities

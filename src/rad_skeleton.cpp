@@ -3,28 +3,14 @@
 using namespace std;
 
 RAD_Skeleton::RAD_Skeleton(Skeleton skel){
-	vector<double> xyz;
 	frame = skel.getFrame();
-	xyz = skel.getJoint(CENT);
-	addJoint(CENT,xyz[0],xyz[1],xyz[2]);
-
-	xyz = skel.getJoint(HEAD);
-	addJoint(HEAD,xyz[0],xyz[1],xyz[2]);
-
-	xyz = skel.getJoint(HANDLEFT);
-	addJoint(HANDLEFT,xyz[0],xyz[1],xyz[2]);
-
-	xyz = skel.getJoint(HANDRIGHT);
-	addJoint(HANDRIGHT,xyz[0],xyz[1],xyz[2]);
-
-	xyz = skel.getJoint(FOOTLEFT);
-	addJoint(FOOTLEFT,xyz[0],xyz[1],xyz[2]);
-
-	xyz = skel.getJoint(FOOTRIGHT);
-	addJoint(FOOTRIGHT,xyz[0],xyz[1],xyz[2]);
-
-	double rho,theta;
-	pair<double,double> tmp_thrh;
+	
+	addJoint(CENT,skel.getJoint(CENT));
+	addJoint(HEAD,skel.getJoint(HEAD));
+	addJoint(HANDLEFT,skel.getJoint(HANDLEFT));
+	addJoint(HANDRIGHT,skel.getJoint(HANDRIGHT));
+	addJoint(FOOTLEFT,skel.getJoint(FOOTLEFT));
+	addJoint(FOOTRIGHT,skel.getJoint(FOOTRIGHT));
 
 	addThetaRho(HEAD,HANDLEFT);
 	addThetaRho(HANDLEFT,FOOTLEFT);
@@ -47,6 +33,18 @@ void RAD_Skeleton::addJoint(int joint,double x, double y, double z){
 	tmp_xyz.push_back(y);
 	tmp_xyz.push_back(z);
 	joints.insert(make_pair(joint,tmp_xyz));
+}
+
+void RAD_Skeleton::addJoint(int joint, vector<double> xyz){
+	switch(joint){
+		case CENT: case HEAD: case HANDLEFT: case HANDRIGHT: case FOOTRIGHT: case FOOTLEFT:
+			break;
+		default:
+			return;
+	}
+	if(joints.find(joint) != joints.end()) return;
+
+	joints.insert(make_pair(joint,xyz));
 }
 
 void RAD_Skeleton::addThetaRho(int joint1, int joint2){

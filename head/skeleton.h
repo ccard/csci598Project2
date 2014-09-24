@@ -5,6 +5,16 @@
  * skeleton information and is not transformed 
  * into any other representation
  */
+
+#ifndef JOINTS_TYPE_
+#define JOINTS_TYPE_
+	#include <map>
+	#include <vector>
+	/**
+	 * This new histogram object contains x y z diplacement histos in that order
+	 */
+	typedef std::map<int,std::vector<double> > Joints;
+#endif
  #include <stdlib.h>
  #include <map>
  #include <string>
@@ -63,5 +73,5 @@
 
  protected:
  	int frame;
- 	std::map<int,std::vector<double> > joints;
+ 	Joints joints;
  };

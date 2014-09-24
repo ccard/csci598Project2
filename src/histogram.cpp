@@ -37,6 +37,37 @@ void Histogram::addValue(double val){
 	//cout << "bin: "<< bin << " val: "<< val << " cnt: " << histo[bin] << endl;
 }
 
+void Histogram::addValue(double _bin, double val){
+	int bin = 0;
+	double prev_min;
+	if(val != val || bin != bin) return;
+	for(map<int,pair<double,double> >::iterator i = bin_map.begin(); i != bin_map.end(); ++i){
+		if(i->first == 0){
+			if (bin < i->second.second){
+				bin = i->first;
+				break;
+			}
+		} else if (i->first == (bins-1)) {
+			if(i->second.first <= _bin){
+				bin = i->first;
+				break;
+			}
+		} else {
+			if(_bin >= i->second.first && _bin < i->second.second){
+				bin = i->first;
+				break;
+			}
+		}
+	}
+	
+	histo[bin] += val;
+	//cout << "bin: "<< bin << " val: "<< val << " cnt: " << histo[bin] << endl;
+}
+
+void Histogram::setValue(int _bin, double val){
+	histo[_bin] = val;
+}
+
 void Histogram::normalize(double T){
 	map<int,double> normed;
 	if (T == 0) return;
@@ -70,4 +101,15 @@ void Histogram::init_histo(){
 		bin_max += (2*step);
 		bin_min += step;
 	}
+}
+
+Histogram Histogram::operator<< (Histogram &hist){
+	if(this->bins != hist.getBins()) return Histogram(1,0,0);
+	if(this->min != hist.getMin()) return Histogram(1,0,0);
+	if(this->max != hist.getMax()) return Histogram(1,0,0);
+	Histogram h(bins,min,max);
+	for(map<int,double>::const_iterator i = histo.begin(); i != histo.end(); ++i){
+		setValue(i->first,i->second+hist.getHisto()[i->first]);
+	}
+	return h;
 }

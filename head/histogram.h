@@ -20,6 +20,10 @@
 
  	void addValue(double val);
 
+ 	void addValue(double _bin, double val);
+
+ 	void setValue(int _bin, double val);
+
  	void normalize(double T);
 
  	void makeLinear(std::vector<double> &linear);
@@ -27,6 +31,10 @@
  	int getBins(){ return bins; };
  	double getMin(){ return min; };
  	double getMax(){ return max; };
+
+ 	std::map<int,double> getHisto(){ return histo; };
+
+ 	Histogram operator<< (Histogram &hist);
 
  private:
  	double bins;

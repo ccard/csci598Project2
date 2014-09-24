@@ -27,7 +27,7 @@ void HJPD_Skeleton::calcDisplace(){
 
 	for (map<int, vector<double> >::iterator i = joints.begin(); i != joints.end(); ++i){
 		if (i->first == refjoint) continue;
-		displacements.insert(i->first,calcVec(refj,i->second));
+		displacements.insert(make_pair(i->first,calcVec(refj,i->second)));
 	}
 }
 

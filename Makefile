@@ -8,8 +8,8 @@ EXEC = parseSkeleton
 EXDEBUG = $(EXEC).d
 BIN = ./bin
 SRC = ./src
-SKELETONS = $(BIN)/skeleton.o $(BIN)/rad_skeleton.o
-COMPUTE = $(BIN)/radcompute.o
+SKELETONS = $(BIN)/skeleton.o $(BIN)/rad_skeleton.o $(BIN)/hjpd_skeleton.o
+COMPUTE = $(BIN)/radcompute.o $(BIN)/hjpdcompute.o
 UTIL = $(BIN)/filehandler.o $(BIN)/histogram.o
 OBJECTS = $(BIN)/main.o $(SKELETONS) $(UTIL) $(COMPUTE) 
 
@@ -26,13 +26,19 @@ $(EXDEBUG): $(OBJECTS)
 $(EXEC): $(OBJECTS)
 	$(GCC) $(DEBUG) $(CXXFLAGS) $^ -o $@
 
-$(BIN)/main.o: $(SRC)/main.cpp $(BIN)/skeleton.o $(BIN)/filehandler.o $(BIN)/rad_skeleton.o $(BIN)/radcompute.o
+$(BIN)/main.o: $(SRC)/main.cpp $(UTIL) $(SKELETONS) $(COMPUTE) 
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
-$(BIN)/radcompute.o: $(SRC)/radcompute.cpp $(BIN)/rad_skeleton.o $(BIN)/histogram.o $(BIN)/filehandler.o
+$(BIN)/radcompute.o: $(SRC)/radcompute.cpp $(BIN)/rad_skeleton.o $(UTIL)
+	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
+
+$(BIN)/hjpdcompute.o: $(SRC)/hjpdcompute.cpp $(BIN)/hjpd_skeleton.o $(UTIL)
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
 $(BIN)/filehandler.o: $(SRC)/filehandler.cpp $(BIN)/skeleton.o
+	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
+
+$(BIN)/hjpd_skeleton.o: $(SRC)/hjpd_skeleton.cpp $(BIN)/skeleton.o
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
 $(BIN)/rad_skeleton.o: $(SRC)/rad_skeleton.cpp $(BIN)/skeleton.o

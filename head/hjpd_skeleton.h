@@ -42,7 +42,7 @@ public:
  	 */
  	 std::map<int,std::vector<double> > getDisplace() const { return displacements; };
 private:
-	std::map<int,std::vector<double> > displacements
+	std::map<int,std::vector<double> > displacements;
 	int refjoint;
 
 	/**

@@ -4,7 +4,7 @@ using namespace std;
 
 HJPDCompute::HJPDCompute(){
 	x_bins = 9;
-	y_bins = 9;
+	y_bins = 8;
 	z_bins = 9;
 	min_x = -0.9;
 	max_x = 1;

@@ -29,7 +29,7 @@
  	double getMax(){ return max; };
 
  private:
- 	int bins;
+ 	double bins;
  	double min,max;
  	std::map<int, double> histo;
  	std::map<int,std::pair<double,double> > bin_map;

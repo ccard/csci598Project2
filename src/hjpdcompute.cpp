@@ -6,11 +6,11 @@ HJPDCompute::HJPDCompute(){
 	x_bins = 9;
 	y_bins = 9;
 	z_bins = 9;
-	min_x = -1;
+	min_x = -0.9;
 	max_x = 1;
-	min_y = -1;
+	min_y = -0.9;
 	max_y = 1;
-	min_z = -1;
+	min_z = -0.9;
 	max_z = 1;
 }
 

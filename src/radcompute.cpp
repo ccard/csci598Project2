@@ -14,7 +14,7 @@ RADCompute::RADCompute(){
 Histograms RADCompute::computeHistograms(set<RAD_Skeleton> frame_skels){
 	map<int, Histogram> d_hist,t_hist;
 	for(set<RAD_Skeleton>::iterator i = frame_skels.begin(); i != frame_skels.end(); ++i){
-		map<int, pair<double,double> > tmp = i->getJointsThetaRho();
+		ThetaRho tmp = i->getJointsThetaRho();
 		for(map<int, pair<double,double> >::iterator j = tmp.begin(); j != tmp.end(); ++j){
 			if(d_hist.find(j->first) == d_hist.end()){
 				Histogram h(n_d_bins,min_d,max_d);

@@ -6,6 +6,15 @@
  * represents theta  and d of joints
  */
 
+#ifndef THETARHO_S_
+#define THETARHO_S_
+	#include <map>
+	/**
+	 * This is a new object to store theta rho map
+	 */
+	typedef std::map<int,std::pair<double,double> > ThetaRho;
+#endif
+
 #include "skeleton.h"
 #include <stdlib.h>
 #include <map>
@@ -51,11 +60,11 @@ public:
  	 *
  	 * @return: map from the joint to pair<theta,rho> 
  	 */
- 	std::map<int, std::pair<double,double> > getJointsThetaRho() const{ return jointThetaRho; };
+ 	ThetaRho getJointsThetaRho() const{ return jointThetaRho; };
 
 private:
 
-	std::map<int, std::pair<double,double> > jointThetaRho;
+	ThetaRho jointThetaRho;
 
 	/**
 	 * Adds a theta and rho value to jointthetarho map

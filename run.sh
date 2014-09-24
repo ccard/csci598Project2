@@ -1,13 +1,13 @@
 #! /bin/bash
 
 rad="RAD"
-hjdp="HJDP"
+hjpd="HJPD"
 hod="HOD"
 
 radfile="rad"
 radtfile="rad.t"
-hjdpfile="hjdp"
-hjdptfile="hjdp.t"
+hjdpfile="hjpd"
+hjdptfile="hjpd.t"
 hodfile="hod"
 hodtfile="hod.t"
 
@@ -17,7 +17,7 @@ function usage {
 	echo "./run.sh <method>"
 	echo "<method> = skeletal representation options are:"
 	echo "           ${rad}"
-	echo "           ${hjdp}"
+	echo "           ${hjpd}"
 	echo "           ${hod}"
 }
 
@@ -46,7 +46,7 @@ function run {
 if [[ $# -ne 1 ]]; then
 	usage
 else
-	if [[ $1 != $rad && $1 != $hjdp && $1 != $hod ]]; then
+	if [[ $1 != $rad && $1 != $hjpd && $1 != $hod ]]; then
 		usage
 	else
 		trfile=""
@@ -54,7 +54,7 @@ else
 		if [[ $1 == $rad ]]; then
 			trfile=$radfile
 			tefile=$radtfile
-		elif [[ $1 == $hjdp ]]; then
+		elif [[ $1 == $hjpd ]]; then
 			trfile=$hjdpfile
 			tefile=$hjdptfile
 		elif [[ $1 == $hod ]]; then
@@ -80,8 +80,8 @@ else
 
 		if [[ $1 == $rad ]]; then
 			argtrain="-c 8 -g 0.125"			
-		elif [[ $1 == $hjdp ]]; then
-			argtrain="-c 8 -g 0.125"
+		elif [[ $1 == $hjpd ]]; then
+			argtrain="-c 8 -g 2"
 		elif [[ $1 == $hod ]]; then
 			argtrain="-c 8 -g 0.125"
 		fi

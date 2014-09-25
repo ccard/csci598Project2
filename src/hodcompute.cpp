@@ -5,13 +5,13 @@ using namespace std;
 HODCompute::HODCompute(int levels){
 	this->levels = levels;
 	min = 0;
-	max = 360;
+	max = 180;
 	n_bins = 8;
 }
 
 Histogram HODCompute::createNormedHistogram(set<Skeleton> skels){
 	Histogram h = recursion(1,skels);
-	h.normalize(pow(2,levels)-1);
+	//h.normalize(pow(2,levels)-1);
 	return h;
 }
 
@@ -129,7 +129,7 @@ Histogram HODCompute::trajectory(set<Skeleton> skels){
 
 	Histogram traj = xy << yz << xz;
 
-	//traj.normalize(skels.size());
+	traj.normalize(skels.size());
 
 	return traj;
 }

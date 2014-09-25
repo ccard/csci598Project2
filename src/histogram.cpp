@@ -107,9 +107,10 @@ Histogram Histogram::operator<< (Histogram hist){
 	if(this->bins != hist.getBins()) return Histogram(1,0,0);
 	if(this->min != hist.getMin()) return Histogram(1,0,0);
 	if(this->max != hist.getMax()) return Histogram(1,0,0);
+	
 	Histogram h(bins,min,max);
 	for(map<int,double>::const_iterator i = histo.begin(); i != histo.end(); ++i){
-		setValue(i->first,i->second+hist.getHisto()[i->first]);
+		h.setValue(i->first,i->second+hist.getHisto()[i->first]);
 	}
 	return h;
 }

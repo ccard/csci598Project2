@@ -15,6 +15,7 @@
 #include "histogram.h"
 #include "hjpdcompute.h"
 #include "hjpd_skeleton.h"
+#include "hodcompute.h"
 
 using namespace std;
 
@@ -102,7 +103,7 @@ bool process_file(string file, string path, map<int,vector<set<Skeleton> > > &sk
 	return !aborted;
 }
 
-int buildRADData(string flag,map<int,vector<set<Skeleton> > > &skels){
+int buildRADData(string flag, map<int,vector<set<Skeleton> > > &skels){
 	map<int, vector<set<RAD_Skeleton> > > rad_skels;
 	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
 		vector<set<RAD_Skeleton> > tmp_v;
@@ -146,7 +147,7 @@ int buildRADData(string flag,map<int,vector<set<Skeleton> > > &skels){
 }
 
 int buildHJDPData(string flag, map<int,vector<set<Skeleton> > > skels){
-	map<int, vector<set<HJPD_Skeleton> > > rad_skels;
+	map<int, vector<set<HJPD_Skeleton> > > hjpd_skels;
 	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
 		vector<set<HJPD_Skeleton> > tmp_v;
 		
@@ -158,14 +159,14 @@ int buildHJDPData(string flag, map<int,vector<set<Skeleton> > > skels){
 			tmp_v.push_back(tmp_s);
 		}
 		
-		rad_skels.insert(make_pair(i->first,tmp_v));
+		hjpd_skels.insert(make_pair(i->first,tmp_v));
 	}
 
 	HJPDCompute hjpdc;
 
 	map<int,vector<vector<double> > > linear_data;
 
-	for(map<int, vector<set<HJPD_Skeleton> > >::iterator i = rad_skels.begin(); i != rad_skels.end(); ++i){
+	for(map<int, vector<set<HJPD_Skeleton> > >::iterator i = hjpd_skels.begin(); i != hjpd_skels.end(); ++i){
 		vector<vector<double> > tmp_v;
 		for(vector<set<HJPD_Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
 			HistogramsXYZ hists = hjpdc.computeHistograms(*j);
@@ -188,7 +189,32 @@ int buildHJDPData(string flag, map<int,vector<set<Skeleton> > > skels){
 	return 0;
 }
 
-int buildHODData(string flag,map<int,vector<set<Skeleton> > > skels){
+int buildHODData(string flag, map<int,vector<set<Skeleton> > > skels){
+	HODCompute hodc;
+
+	map<int,vector<vector<double> > > linear_data;
+
+	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
+		vector<vector<double> > tmp_v;
+		for(vector<set<Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
+			Histogram hist = hodc.createNormedHistogram(*j);
+			tmp_v.push_back(hodc.toOneD(hist));
+		}
+		linear_data.insert(make_pair(i->first,tmp_v));
+	}
+
+	string filename = "hod";
+	filename += flag == TEST ? ".t" : ""; 
+	FileHandler out(filename,false);
+
+	if(!hodc.write(out,linear_data)){
+		out.close();
+		cerr << "please check error msgs" << endl;
+		return 2;
+	}
+	out.close();
+	return 0;
+
 	return 0;
 }
 

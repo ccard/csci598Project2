@@ -9,7 +9,7 @@ EXDEBUG = $(EXEC).d
 BIN = ./bin
 SRC = ./src
 SKELETONS = $(BIN)/skeleton.o $(BIN)/rad_skeleton.o $(BIN)/hjpd_skeleton.o
-COMPUTE = $(BIN)/radcompute.o $(BIN)/hjpdcompute.o
+COMPUTE = $(BIN)/radcompute.o $(BIN)/hjpdcompute.o $(BIN)/hodcompute.o
 UTIL = $(BIN)/filehandler.o $(BIN)/histogram.o
 OBJECTS = $(BIN)/main.o $(SKELETONS) $(UTIL) $(COMPUTE) 
 
@@ -33,6 +33,9 @@ $(BIN)/radcompute.o: $(SRC)/radcompute.cpp $(BIN)/rad_skeleton.o $(UTIL)
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
 $(BIN)/hjpdcompute.o: $(SRC)/hjpdcompute.cpp $(BIN)/hjpd_skeleton.o $(UTIL)
+	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
+
+$(BIN)/hodcompute.o: $(SRC)/hodcompute.cpp $(BIN)/skeleton.o $(UTIL)
 	$(GCC) $(DEBUG) -c $(CXXFLAGS) $^ -o $@
 
 $(BIN)/filehandler.o: $(SRC)/filehandler.cpp $(BIN)/skeleton.o

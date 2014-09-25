@@ -103,7 +103,7 @@ void Histogram::init_histo(){
 	}
 }
 
-Histogram Histogram::operator<< (Histogram &hist){
+Histogram Histogram::operator<< (Histogram hist){
 	if(this->bins != hist.getBins()) return Histogram(1,0,0);
 	if(this->min != hist.getMin()) return Histogram(1,0,0);
 	if(this->max != hist.getMax()) return Histogram(1,0,0);

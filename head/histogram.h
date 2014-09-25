@@ -34,7 +34,7 @@
 
  	std::map<int,double> getHisto(){ return histo; };
 
- 	Histogram operator<< (Histogram &hist);
+ 	Histogram operator<< (Histogram hist);
 
  private:
  	double bins;

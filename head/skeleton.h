@@ -38,6 +38,14 @@
  		return rhs.frame < lhs.frame;
  	};
 
+ 	bool operator< (const int &oframe) const{
+ 		return frame < oframe;
+ 	};
+
+ 	bool operator() (const Skeleton &rhs,const int &lhsframe){
+ 		return rhs.frame < lhsframe;
+ 	};
+
  	int getFrame(){ return frame; };
 
  	/**

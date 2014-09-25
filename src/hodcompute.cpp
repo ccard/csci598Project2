@@ -4,14 +4,14 @@ using namespace std;
 
 HODCompute::HODCompute(int levels){
 	this->levels = levels;
-	min = 0;
-	max = 180;
+	min = -30;
+	max = 30;
 	n_bins = 8;
 }
 
 Histogram HODCompute::createNormedHistogram(set<Skeleton> skels){
 	Histogram h = recursion(1,skels);
-	//h.normalize(pow(2,levels)-1);
+	h.normalize(pow(2,levels)-1);
 	return h;
 }
 
@@ -68,8 +68,6 @@ Histogram HODCompute::recursion(int level, set<Skeleton> skels){
 	set<Skeleton>::iterator mid = skels.find(half);
 	set<Skeleton> left(skels.begin(),mid);
 	set<Skeleton> right(mid,skels.end());
-
-	cout << half << ":" << skels.size() << endl;
 
 	return recursion(level,left) << recursion(level,right);
 }

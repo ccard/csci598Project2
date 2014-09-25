@@ -52,8 +52,10 @@ output files press n if you would like to save the files.
 &nbsp;&nbsp;&nbsp; This method creates the skeletel representation based off of
 the RAD skeleton as described in the project paper.  To run this method call 
 `./run.sh RAD`
+This uses joints 1 (as centroid), 4,8,12,16,20 of the skeleton.
 
 ## Histogram of Joint Position Differences ##
+&nbsp;&nbsp;&nbsp; This method creates the skeltel representation using the Histogram of joint posistion differeces using joint 3 (the upper torso) as the reference joint as this is the most reliably detected joint detected in the skeleton. to run this method call `./run.sh HJPD`.
 
 ## Histogram of Oriented Displacements ##
 

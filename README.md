@@ -60,6 +60,7 @@ the RAD skeleton as described in the project paper.  To run this method call
 ## Histogram of Oriented Displacements ##
 &nbsp;&nbsp;&nbsp; This method uses Histogram of Oriented Displacements (HOD) and a temporal pyramid with 3 levels.  Each level splits the instance set of the previous level in half creating histograms for each half.  In total my temporal pyramid has 7 histograms.  Before the Temporal Histograms (THs) are concatinated they are each normalized.  Once the THs are concatinated the resulting histogram is normalized by divinding by 7.  These normalization steps help to smooth the data and make it less dependent upon the data set size. To run this method call `./run.sh HOD`.
 
+----
 # Results #
 &nbsp;&nbsp;My results from _RAD_,_HJPD_ and _HOD_ from my execution of my program are very promissing. Each representation achives a classifier accuracy over 65%.  My _RAD_ skeletel representation achieves a classifier accuracy of 68.75% and the confusion matrix can be seen in __Figure 1__ in the [appendix](#appendix).  My _HJPD_ skeletel representation achieves a classifier accurarcy of 83.33% and the confusion matrix can be seen in __Figure 2__ in the [appendix](#appendix). My _HOD_ skeletel representation achieves a classifier accuracy of 70.83% and the confusion matrix can be seen in __Figure 3__ in the [appendix](#appendix).  
 
@@ -67,9 +68,11 @@ the RAD skeleton as described in the project paper.  To run this method call
 
 &nbsp;&nbsp;Both the classifier accuracy and confusion matrix will be outputed at the end of each call of `./run.sh`.
 
+----
 # References #
 1. [Project paper](http://inside.mines.edu/~hzhang/Courses/CSCI498B-598B-Fall14/Projects/Project-2/Project-2.pdf) and attached papers.
 
+----
 # Appendix #
 __Figure 1__: RAD confusion matrix
 ```

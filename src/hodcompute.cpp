@@ -4,8 +4,8 @@ using namespace std;
 
 HODCompute::HODCompute(int levels){
 	this->levels = levels;
-	min = -30;
-	max = 30;
+	min = -20;
+	max = 20;
 	n_bins = 8;
 }
 

@@ -2,6 +2,7 @@ CSCI598 Project2
 ===============
 
 &nbsp;&nbsp;___Author:___   Chris  Card
+
 &nbsp;&nbsp;Click [here](https://github.com/ccard/csci598Project2/blob/master/README.md) for the cleanly formatted version of this README.
 
  &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, 

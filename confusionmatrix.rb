@@ -48,29 +48,35 @@ def calc_confustion(classes,actual,predict)
 end
 
 def create_table_header(table_width,column_width,classes)
-	puts "#{" "*(column_width-1)}+#{"-"*(table_width-column_width-1)}+"
-	puts "#{" "*(column_width-1)}|#{"%-#{table_width-column_width-1}.#{table_width-column_width-1}s" % "Predicted"}|"
-	puts "+#{"-"*(column_width-2)}+#{"-"*(table_width-column_width-1)}+"
+	title = "#{" "*(column_width-1)}+#{"-"*(table_width-column_width-1)}+\n"
+	title  << "#{" "*(column_width-1)}|#{"%-#{table_width-column_width-1}.#{table_width-column_width-1}s" % "Predicted"}|\n"
+	title << "+#{"-"*(column_width-2)}+#{"-"*(table_width-column_width-1)}+\n"
+	
 	column_names = ""
 	classes.each{ |key, value| column_names << "#{"%-#{column_width-1}.#{column_width-1}s" % value}|"}
-	puts "|#{"%-#{column_width-2}.#{column_width-2}s" % "Actual"}|#{column_names}"
+	title << "|#{"%-#{column_width-2}.#{column_width-2}s" % "Actual"}|#{column_names}\n"
+	
 	title_sep = "+#{"-"*(column_width-2)}+"
 	for i in classes.keys do
 		title_sep << "#{"-"*(column_width-1)}+"
 	end
-	puts title_sep
+	title << title_sep
+	
+	return title << "\n"
 end
 
 def create_row(table_width,column_width,classes,actual_id,confusion_row)
 	row_str = "|#{"%-#{column_width-2}.#{column_width-2}s" % classes[actual_id]}|"
 	confusion_row.each {|key,value| row_str << "#{"%-#{column_width-1}.#{column_width-1}s" % value}|"}
-	puts row_str
+	row_str << "\n"
 
 	title_sep = "+#{"-"*(column_width-2)}+"
 	for i in classes.keys do
 		title_sep << "#{"-"*(column_width-1)}+"
 	end
-	puts title_sep
+	row_str << title_sep
+	
+	return row_str << "\n"
 end
 
 showusage unless ARGV.size == 2
@@ -92,8 +98,14 @@ predict_file_results = read_predict_file predict_file
 
 confusionmatrix = calc_confustion classes,test_file_results,predict_file_results
 
-create_table_header table_width,column_width,classes
+file_out = create_table_header table_width,column_width,classes
 
 confusionmatrix.each{ |key, value|
-	create_row table_width,column_width,classes,key,value
+	file_out << create_row(table_width,column_width,classes,key,value)
 }
+
+puts file_out
+
+f = File.open "confusion_out.txt",'w'
+f << file_out
+f.close

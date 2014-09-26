@@ -1,9 +1,9 @@
 /**
  * Author: Chris Card
  * 
- * runns the program for all test and trianing set
- * building 
+ * runs the program for all test and trianing sets
  */
+ 
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>

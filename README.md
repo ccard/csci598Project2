@@ -39,7 +39,7 @@ Ensure that _run.sh_ is in the root directory of the project as well as *human_a
 ## Execution script ##
 &nbsp;&nbsp;_run.sh_ is used to create the training and testing as well as creating and testing the classifiers using libsvm.  _run.sh_ should be called as follows, it will check your parameters and output its usage if any paramaters are incorrect:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'./run.sh <method>'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./run.sh <method>`
 - `<method>` = the string representing each part of the program to run
  - [RAD](#relative-angle-and-distances)
  - [HJPD](#histogram-of-joint-position-differences)

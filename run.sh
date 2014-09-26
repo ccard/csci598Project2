@@ -35,12 +35,17 @@ function clearFiles {
 function run {
 	local message=$1
 	local stmt=$2
+	local cap_out=$3
 
-	echo -n "${message} .... "
-	local res=`eval $stmt`
-	echo "done"
-	echo "Output:"
-	echo $res
+	if [[ $cap_out == "n" ]]; then
+		eval $stmt
+	else
+		echo -n "${message} .... "
+		local res=`eval $stmt`
+		echo "done"
+		echo "Output:"
+		echo $res
+	fi
 }
 
 if [[ $# -ne 1 ]]; then
@@ -83,7 +88,7 @@ else
 		elif [[ $1 == $hjpd ]]; then
 			argtrain="-c 8 -g 2"
 		elif [[ $1 == $hod ]]; then
-			argtrain="-c 8 -g 0.125"
+			argtrain="-c 8 -g 2"
 		fi
 
 		#execution commands for svm
@@ -95,6 +100,7 @@ else
 		#execution commands for my program to create the skeletons data
 		train="./${exe} -tr ${1} \"./data/dataset/Train/\" human_actions.txt"
 		test_p="./${exe} -te ${1} \"./data/dataset/Test/\" test_human_actions.txt"
+		create_confusion="./confusionmatrix.rb test_human_actions.txt ${predfile}"
 
 		#Execution of my program and libsvm
 		run "Creating training data" "${train}" 
@@ -108,6 +114,8 @@ else
 		run "Training svm" "${extrain}"
 
 		run "Running prediction" "${expred}"
+
+		run "Creating confusionmatrix (confusion_out.txt)" "${create_confusion}" "n"
 
 		clearFiles result
 		

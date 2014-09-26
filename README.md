@@ -64,7 +64,7 @@ the RAD skeleton as described in the project paper.  To run this method call
 # Results #
 &nbsp;&nbsp;My results from _RAD_,_HJPD_ and _HOD_ from my execution of my program are very promissing. Each representation achives a classifier accuracy over 65%.  My _RAD_ skeletel representation achieves a classifier accuracy of 68.75% and the confusion matrix can be seen in __Figure 1__ in the [appendix](#appendix).  My _HJPD_ skeletel representation achieves a classifier accurarcy of 83.33% and the confusion matrix can be seen in __Figure 2__ in the [appendix](#appendix). My _HOD_ skeletel representation achieves a classifier accuracy of 70.83% and the confusion matrix can be seen in __Figure 3__ in the [appendix](#appendix).  
 
-&nbsp;&nbsp;These results are statistically significant because each method produce more than just a random guess.  In this case since there are 6 classes there is a 16.66% (1/6) that the classifier can randomly gues correctly.  But each of my skeletel representations has beter than 66.66% (2/3) chance of being corretly classifing. This means that the classifier is learning my representations and learning them effectively.
+&nbsp;&nbsp;These results are statistically significant because each method produce more than just a random guess.  In this case since there are 6 classes there is a 16.66% (1/6) chance that the classifier can randomly gues correctly.  But each of my skeletel representations has beter than 66.66% (2/3) chance of being corretly classifing. This means that the classifier is learning my representations and learning them effectively.
 
 &nbsp;&nbsp;Both the classifier accuracy and confusion matrix will be outputed at the end of each call of `./run.sh`.
 

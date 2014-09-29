@@ -37,7 +37,7 @@ Ensure that _run.sh_ is in the root directory of the project as well as *human_a
 `Class(int),file(string)`
 
 ## Execution script ##
-&nbsp;&nbsp;_run.sh_ is used to create the training and testing as well as creating and testing the classifiers using libsvm.  _run.sh_ should be called as follows, it will check your parameters and output its usage if any paramaters are incorrect:
+&nbsp;&nbsp;_run.sh_ is used to create the training and testing data as well as creating and testing the classifiers using libsvm.  _run.sh_ should be called as follows, it will check your parameters and output its usage if any paramaters are incorrect:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./run.sh <method>`
 - `<method>` = the string representing each part of the program to run
@@ -45,7 +45,7 @@ Ensure that _run.sh_ is in the root directory of the project as well as *human_a
  - [HJPD](#histogram-of-joint-position-differences)
  - [HOD](#histogram-of-oriented-displacements)
 
-During _run.sh_'s execution it will display its status (i.e. 'Creating training data ....', 'Training svm ....') and the output of each stage if there is any.  After 'Running prediction .... ' _run.sh_ will output the classifiers accuracy as well as the confusion matrix (the confusion matrix will also be saved to *confusion_out.txt*). At the end of `./run.sh` call it will ask you if you want it to clean up the output files press n if you would like to save the files.
+During _run.sh_'s execution it will display its status (i.e. 'Creating training data ....', 'Training svm ....', etc.) and the output of each stage, if there is any.  After 'Running prediction .... ' _run.sh_ will output the classifiers accuracy as well as the confusion matrix (the confusion matrix will also be saved to *confusion_out.txt*). At the end of `./run.sh` call it will ask you if you want it to clean up the output files, press n if you would like to save the files.
 
 __Note:__ You should only have to run `make`,`./setup.sh` and `./run.sh` to run and test my program if these don't work please email me.
 
@@ -64,7 +64,7 @@ the RAD skeleton as described in the project paper.  To run this method call
 # Results #
 &nbsp;&nbsp;My results from _RAD_,_HJPD_ and _HOD_ from my execution of my program are very promissing. Each representation achives a classifier accuracy over 65%.  My _RAD_ skeletel representation achieves a classifier accuracy of 68.75% and the confusion matrix can be seen in __Figure 1__ in the [appendix](#appendix).  My _HJPD_ skeletel representation achieves a classifier accurarcy of 83.33% and the confusion matrix can be seen in __Figure 2__ in the [appendix](#appendix). My _HOD_ skeletel representation achieves a classifier accuracy of 70.83% and the confusion matrix can be seen in __Figure 3__ in the [appendix](#appendix).  
 
-&nbsp;&nbsp;These results are statistically significant because each method produce more than just a random guess.  In this case since there are 6 classes there is a 16.66% (1/6) chance that the classifier can randomly gues correctly.  But each of my skeletel representations has beter than 66.66% (2/3) chance of being corretly classifing. This means that the classifier is learning my representations and learning them effectively.
+&nbsp;&nbsp;These results are statistically significant because each method produces more than just a random guess.  In this case since there are 6 classes there is a 16.66% (1/6) chance that the classifier can randomly guess correctly.  But each of my skeletel representations has beter than 66.66% (2/3) chance of being corretly classifing. This means that the classifier is learning my representations and learning them effectively.
 
 &nbsp;&nbsp;Both the classifier accuracy and confusion matrix will be outputed at the end of each call of `./run.sh`.
 

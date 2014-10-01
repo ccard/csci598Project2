@@ -88,7 +88,7 @@ else
 		elif [[ $1 == $hjpd ]]; then
 			argtrain="-c 8 -g 2"
 		elif [[ $1 == $hod ]]; then
-			argtrain="-c 8 -g 0.125"
+			argtrain="-c 8 -g 2"
 		fi
 
 		#execution commands for svm

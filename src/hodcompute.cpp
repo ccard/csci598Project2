@@ -7,12 +7,12 @@ HODCompute::HODCompute(int levels){
 	minx = -15;
 	maxx = 15;
 	n_xy_bins = 8;
-	miny = -15;
-	maxy = 15;
-	n_yz_bins = 8;
-	minz = -15;
-	maxz = 15;
-	n_xz_bins = 8;
+	miny = -10;
+	maxy = 10;
+	n_yz_bins = 6;
+	minz = -5;
+	maxz = 5;
+	n_xz_bins = 5;
 }
 
 HistogramTMP HODCompute::createNormedHistogram(set<Skeleton> skels){

@@ -138,10 +138,13 @@ __Figure 3__: HOD confusion matrix
 ```
 
 __Figure 4__: RAD graph
+
 ![rad graph](graph_rad.png)
 
 __Figure 5__: HJPD graph
+
 ![hjpd graph](graph_hjpd.png)
 
 __Figure 6__: HOD graph
+
 ![hod graph](graph_hod.png) 

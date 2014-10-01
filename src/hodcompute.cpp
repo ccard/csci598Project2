@@ -4,9 +4,15 @@ using namespace std;
 
 HODCompute::HODCompute(int levels){
 	this->levels = levels;
-	min = -15;
-	max = 15;
-	n_bins = 8;
+	minx = -15;
+	maxx = 15;
+	n_xy_bins = 8;
+	miny = -15;
+	maxy = 15;
+	n_yz_bins = 8;
+	minz = -15;
+	maxz = 15;
+	n_xz_bins = 8;
 }
 
 HistogramTMP HODCompute::createNormedHistogram(set<Skeleton> skels){
@@ -83,9 +89,9 @@ Histogram HODCompute::recursion(int level,int hist, set<Skeleton> skels){
 }
 
 Histogram HODCompute::trajectory(set<Skeleton> skels,int hist){
-	Histogram xy(n_bins,min,max);
-	Histogram yz(n_bins,min,max);
-	Histogram xz(n_bins,min,max);
+	Histogram xy(n_xy_bins,minx,maxx);
+	Histogram yz(n_yz_bins,miny,maxy);
+	Histogram xz(n_xz_bins,minz,maxz);
 	set<Skeleton>::iterator last = skels.end();
 	last--;
 	set<Skeleton>::iterator next;

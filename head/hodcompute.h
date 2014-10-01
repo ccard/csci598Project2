@@ -68,8 +68,8 @@ public:
 	 */
 	bool write(FileHandler &f, std::map<int, std::vector<std::vector<double> > > &linear_hist);
 private:
-	int levels,n_bins;
-	double min,max;
+	int levels,n_xy_bins,n_yz_bins,n_xz_bins;
+	double minx,maxx,miny,maxy,minz,maxz;
 
 	//HistogramsTMP internal;
 	

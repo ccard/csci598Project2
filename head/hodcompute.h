@@ -14,7 +14,7 @@
 	/**
 	 * This new histogram object contains x y z diplacement histos in that order
 	 */
-	typedef std::map<int,std::vector<Histogram> > HistogramsTMP;
+	typedef std::vector<Histogram> HistogramTMP;
 
 #define PI 3.14159265
 #endif
@@ -48,7 +48,7 @@ public:
 	 *
 	 * @return: the histgram of the temporal pyramid concatinated
 	 */
-	Histogram createNormedHistogram(std::set<Skeleton> skels);
+	HistogramTMP createNormedHistogram(std::set<Skeleton> skels);
 
 	/**
 	 * Converts the histogram to a one d vector
@@ -57,7 +57,7 @@ public:
 	 * 
 	 * @return: the oned representation of the histogram
 	 */
-	std::vector<double> toOneD(Histogram hist);
+	std::vector<double> toOneD(HistogramTMP hist);
 
 	/**
 	 * Writes the data to a file in the libsvm format
@@ -71,26 +71,28 @@ private:
 	int levels,n_bins;
 	double min,max;
 
-	HistogramsTMP internal;
+	//HistogramsTMP internal;
 	
 	/**
 	 * This is a recursive helper function for creating the temporal pyramid
 	 *
 	 * @param: the current level of the pyramid
+	 * @param: the histgram to make 1=>xy,2=>yz,3=>xz
 	 * @param: the set to make the current level of the pyramid with
 	 *
 	 * @return: the concatinated noramlized pyramid
 	 */
-	Histogram recursion(int level, std::set<Skeleton> skels);
+	Histogram recursion(int level,int hist, std::set<Skeleton> skels);
 
 	/**
 	 * Calculates the trajectory histogram
 	 *
 	 * @param: the set of skeletons to create the histogram of
+	 * @param: the histo gram to make 1=>xy,2=>yz,3=>xz
 	 *
 	 * @return: the 3d trajectory histogram
 	 */
-	Histogram trajectory(std::set<Skeleton> skels);
+	Histogram trajectory(std::set<Skeleton> skels,int hist);
 
 	/**
 	 * Calculates the angle between 2d points in time

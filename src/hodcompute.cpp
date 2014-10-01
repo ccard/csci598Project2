@@ -9,15 +9,25 @@ HODCompute::HODCompute(int levels){
 	n_bins = 8;
 }
 
-Histogram HODCompute::createNormedHistogram(set<Skeleton> skels){
-	Histogram h = recursion(1,skels);
-	h.normalize(pow(2,levels)-1);
+HistogramTMP HODCompute::createNormedHistogram(set<Skeleton> skels){
+	Histogram xy = recursion(1,1,skels);
+	Histogram yz = recursion(1,2,skels);
+	Histogram xz = recursion(1,3,skels);
+	xy.normalize(pow(2,levels)-1);
+	yz.normalize(pow(2,levels)-1);
+	xz.normalize(pow(2,levels)-1);
+	HistogramTMP h;
+	h.push_back(xy);
+	h.push_back(yz);
+	h.push_back(xz);
 	return h;
 }
 
-vector<double> HODCompute::toOneD(Histogram hist){
+vector<double> HODCompute::toOneD(HistogramTMP hist){
 	vector<double> ret;
-	hist.makeLinear(ret);
+	hist[0].makeLinear(ret);
+	hist[1].makeLinear(ret);
+	hist[2].makeLinear(ret);
 	return ret;
 }
 
@@ -57,8 +67,8 @@ bool HODCompute::write(FileHandler &f, map<int, vector<vector<double> > > &linea
 	return !aborted;
 }
 
-Histogram HODCompute::recursion(int level, set<Skeleton> skels){
-	Histogram h = trajectory(skels);
+Histogram HODCompute::recursion(int level,int hist, set<Skeleton> skels){
+	Histogram h = trajectory(skels,hist);
 	if (level == levels) return h;
 
 	++level;
@@ -69,10 +79,10 @@ Histogram HODCompute::recursion(int level, set<Skeleton> skels){
 	set<Skeleton> left(skels.begin(),mid);
 	set<Skeleton> right(mid,skels.end());
 
-	return recursion(level,left) << recursion(level,right);
+	return recursion(level,hist,left) << recursion(level,hist,right);
 }
 
-Histogram HODCompute::trajectory(set<Skeleton> skels){
+Histogram HODCompute::trajectory(set<Skeleton> skels,int hist){
 	Histogram xy(n_bins,min,max);
 	Histogram yz(n_bins,min,max);
 	Histogram xz(n_bins,min,max);
@@ -90,42 +100,72 @@ Histogram HODCompute::trajectory(set<Skeleton> skels){
 			vector<double> jointcord_t1 = t_1.getJoint(j);
 			vector<double> xy_t, xy_t1, yz_t, yz_t1, xz_t, xz_t1;
 			
-			//forming xy points
-			xy_t.push_back(jointcord_t[X]);
-			xy_t.push_back(jointcord_t[Y]);
-			xy_t1.push_back(jointcord_t1[X]);
-			xy_t1.push_back(jointcord_t1[Y]);
-
-			//forming yz points
-			yz_t.push_back(jointcord_t[Y]);
-			yz_t.push_back(jointcord_t[Z]);
-			yz_t1.push_back(jointcord_t1[Y]);
-			yz_t1.push_back(jointcord_t1[Z]);
-
-			//form xz points
-			xz_t.push_back(jointcord_t[X]);
-			xz_t.push_back(jointcord_t[Z]);
-			xz_t1.push_back(jointcord_t1[X]);
-			xz_t1.push_back(jointcord_t1[Z]);
-
+			switch(hist){
+				case 1:
+					//forming xy points
+					xy_t.push_back(jointcord_t[X]);
+					xy_t.push_back(jointcord_t[Y]);
+					xy_t1.push_back(jointcord_t1[X]);
+					xy_t1.push_back(jointcord_t1[Y]);
+					break;
+				case 2:
+					//forming yz points
+					yz_t.push_back(jointcord_t[Y]);
+					yz_t.push_back(jointcord_t[Z]);
+					yz_t1.push_back(jointcord_t1[Y]);
+					yz_t1.push_back(jointcord_t1[Z]);
+					break;
+				case 3:
+					//form xz points
+					xz_t.push_back(jointcord_t[X]);
+					xz_t.push_back(jointcord_t[Z]);
+					xz_t1.push_back(jointcord_t1[X]);
+					xz_t1.push_back(jointcord_t1[Z]);
+					break;
+			}
 			//Calc angles and mags and addin to appropriate histogram
 			double xy_mag, xy_ang, yz_mag, yz_ang, xz_mag, xz_ang;
-			xy_mag = calcMag(xy_t, xy_t1); 
-			xy_ang = calcAngle(xy_t, xy_t1);
-			
-			yz_mag = calcMag(yz_t, yz_t1); 
-			yz_ang = calcAngle(yz_t, yz_t1);
-			
-			xz_mag = calcMag(xz_t, xz_t1); 
-			xz_ang = calcAngle(xz_t, xz_t1);
-			
-			xy.addValue(xy_ang,xy_mag);
-			yz.addValue(yz_ang,yz_mag);
-			xz.addValue(xz_ang,xz_mag);
+			switch(hist){
+				case 1:
+					xy_mag = calcMag(xy_t, xy_t1); 
+					xy_ang = calcAngle(xy_t, xy_t1);
+					break;
+				case 2:
+					yz_mag = calcMag(yz_t, yz_t1); 
+					yz_ang = calcAngle(yz_t, yz_t1);
+					break;
+				case 3:			
+					xz_mag = calcMag(xz_t, xz_t1); 
+					xz_ang = calcAngle(xz_t, xz_t1);
+					break;
+			}
+			switch(hist){
+				case 1:
+					xy.addValue(xy_ang,xy_mag);
+					break;
+				case 2:
+					yz.addValue(yz_ang,yz_mag);
+					break;
+				case 3:
+					xz.addValue(xz_ang,xz_mag);
+					break;
+			}
 		}
 	}
 
-	Histogram traj = xy << yz << xz;
+	Histogram traj;// = xy << yz << xz;
+
+	switch(hist){
+		case 1:
+			traj = xy;
+			break;
+		case 2:
+			traj = yz;
+			break;
+		case 3:
+			traj = xz;
+			break;
+	}
 
 	traj.normalize(skels.size());
 

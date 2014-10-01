@@ -197,7 +197,7 @@ int buildHODData(string flag, map<int,vector<set<Skeleton> > > skels){
 	for(map<int, vector<set<Skeleton> > >::iterator i = skels.begin(); i != skels.end(); ++i){
 		vector<vector<double> > tmp_v;
 		for(vector<set<Skeleton> >::iterator j = i->second.begin(); j != i->second.end(); ++j){
-			Histogram hist = hodc.createNormedHistogram(*j);
+			HistogramTMP hist = hodc.createNormedHistogram(*j);
 			tmp_v.push_back(hodc.toOneD(hist));
 		}
 		linear_data.insert(make_pair(i->first,tmp_v));

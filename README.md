@@ -62,7 +62,7 @@ the RAD skeleton as described in the project paper.  To run this method call
 
 ----
 # Results #
-&nbsp;&nbsp;My results from _RAD_,_HJPD_ and _HOD_ from my execution of my program are very promissing. Each representation achives a classifier accuracy over 65%.  My _RAD_ skeletel representation achieves a classifier accuracy of 68.75% and the confusion matrix can be seen in __Figure 1__ in the [appendix](#appendix).  My _HJPD_ skeletel representation achieves a classifier accurarcy of 83.33% and the confusion matrix can be seen in __Figure 2__ in the [appendix](#appendix). My _HOD_ skeletel representation achieves a classifier accuracy of 70.83% and the confusion matrix can be seen in __Figure 3__ in the [appendix](#appendix).  
+&nbsp;&nbsp;My results from _RAD_,_HJPD_ and _HOD_ from my execution of my program are very promissing. Each representation achives a classifier accuracy over 65%.  My _RAD_ skeletel representation achieves a classifier accuracy of 68.75% and the confusion matrix can be seen in __Figure 1__ in the [appendix](#appendix).  My _HJPD_ skeletel representation achieves a classifier accurarcy of 83.33% and the confusion matrix can be seen in __Figure 2__ in the [appendix](#appendix). My _HOD_ skeletel representation achieves a classifier accuracy of 87.5% and the confusion matrix can be seen in __Figure 3__ in the [appendix](#appendix).  
 
 &nbsp;&nbsp;These results are statistically significant because each method produces more than just a random guess.  In this case since there are 6 classes there is a 16.66% (1/6) chance that the classifier can randomly guess correctly.  But each of my skeletel representations has beter than 66.66% (2/3) chance of being corretly classifing. This means that the classifier is learning my representations and learning them effectively.
 
@@ -123,16 +123,25 @@ __Figure 3__: HOD confusion matrix
 +----------+------------------------------------------------------------------+
 |Actual    |CheerUp    |TossPaper  |LineOnSofa |Walking  |StandUp  |SitDown   |
 +----------+-----------+-----------+-----------+---------+---------+----------+
-|CheerUp   |5          |0          |1          |0        |0        |2         |
+|CheerUp   |6          |0          |1          |0        |1        |0         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
 |TossPaper |1          |6          |0          |0        |1        |0         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
-|LineOnSofa|2          |0          |5          |0        |0        |1         |
+|LineOnSofa|1          |0          |6          |0        |0        |1         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
-|Walking   |1          |0          |0          |6        |1        |0         |
+|Walking   |0          |0          |0          |8        |0        |0         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
-|StandUp   |1          |0          |0          |1        |5        |1         |
+|StandUp   |0          |0          |0          |0        |8        |0         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
-|SitDown   |0          |1          |0          |0        |0        |7         |
+|SitDown   |0          |0          |0          |0        |0        |8         |
 +----------+-----------+-----------+-----------+---------+---------+----------+
 ```
+
+__Figure 4__: RAD graph
+![rad graph](graph_rad.png)
+
+__Figure 5__: HJPD graph
+![hjpd graph](graph_hjpd.png)
+
+__Figure 6__: HOD graph
+![hod graph](graph_hod.png) 

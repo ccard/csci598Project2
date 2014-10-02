@@ -5,8 +5,10 @@ CSCI598 Project2
 
 &nbsp;&nbsp;Click [here](https://github.com/ccard/csci598Project2/blob/master/README.md) for the cleanly formatted version of this README.
 
- &nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, 
- the [environment](#environment) you will need, and finally [how to run](#how-to-run) each part of the program.
+&nbsp;&nbsp;__Note:__ The intermediate files rad,rad.t,hjpd,hjpd.t,hod and hod.t are __not__ included because all steps of the training and testing pipe line are handled by the automated script _run.sh_ (see [how to run](#how-to-run)). `./run.sh <method>` is the only call needed to build the skeletal representation (_Train_ and _Test_), train the classifier and test the classifier.
+
+&nbsp;&nbsp;This README file will explain how to [compile](#compile) the program, 
+the [environment](#environment) you will need, and finally [how to run](#how-to-run) each part of the program.
 
 
 --- 

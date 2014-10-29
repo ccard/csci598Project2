@@ -214,8 +214,6 @@ int buildHODData(string flag, map<int,vector<set<Skeleton> > > skels){
 	}
 	out.close();
 	return 0;
-
-	return 0;
 }
 
 void showUsage(){
